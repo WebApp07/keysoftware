@@ -4,7 +4,6 @@ import "@/assets/styles/globals.css";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
-import Script from "next/script";
 import WhatsappButton from "@/components/WhatsappButton";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,21 +23,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="light"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <html lang="en" suppressHydrationWarning>
-          <body className={`${inter.className} antialiased`}>
-            {children}
-            <WhatsappButton />
-            <Toaster />
-          </body>
-        </html>
-      </ThemeProvider>
-    </>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <meta
+            name="google-site-verification"
+            content="0vv64_mxh5oPcbqX9tc0xFgE-dleax-NIwQs03ehAY8"
+          />
+          {/* You can add other meta tags here too */}
+        </head>
+        <body className={`${inter.className} antialiased`}>
+          {children}
+          <WhatsappButton />
+          <Toaster />
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }
