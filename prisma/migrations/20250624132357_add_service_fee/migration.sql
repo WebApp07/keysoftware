@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Cart" ADD COLUMN     "serviceFee" DECIMAL(10,2) NOT NULL DEFAULT 2.99;
