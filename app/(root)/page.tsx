@@ -9,6 +9,7 @@ import {
 } from "@/lib/actions/product.actions";
 import FAQPage from "@/components/FAQ";
 import SafeBrowsingTrust from "@/components/SafeBrowsingTrust";
+import ReviewsSection from "../../components/ReviewsSection";
 
 const Home = async () => {
   const latestProducts = await getLatestProducts();
@@ -25,6 +26,7 @@ const Home = async () => {
       <DealCountdown />
 
       <IconBoxes />
+      <ReviewsSection />
       <FAQPage />
 
       <ViewAllProductsButton />
