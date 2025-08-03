@@ -54,7 +54,7 @@ export default function ContactForm() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            +39 7 58 32 13 08
+            +33 75 83 29 526
           </a>
         </p>
       </div>
