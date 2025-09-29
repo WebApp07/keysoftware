@@ -13,6 +13,7 @@ import ReviewList from "./review-list";
 import { auth } from "@/auth";
 import Rating from "@/components/shared/product/rating";
 import RelatedProducts from "@/components/RelatedProducts";
+//import ProductStats from "@/components/shared/ProductStats";
 import ProductFeatures from "@/components/shared/product/product-features";
 
 // --- Stock Badge Component ---
@@ -84,24 +85,10 @@ const DeliveryNotice = ({
   );
 };
 
-// --- Sold Count Badge ---
-const SoldCountBadge = ({ sold }: { sold: number }) => {
-  return (
-    <span className="inline-flex items-center animate-pulse rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900 dark:text-blue-300">
-      🎉 We’ve sold {sold.toLocaleString()} units!
-    </span>
-  );
-};
-
-// --- Props Type for Next.js Page ---
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-const ProductDetailsPage = async ({ params }: PageProps) => {
-  const { slug } = params;
+const ProductDetailsPage = async (props: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await props.params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
@@ -110,7 +97,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
   ).map((relatedProduct) => ({
     ...relatedProduct,
     price: relatedProduct.price.toString(),
-    image: relatedProduct.images?.[0] ?? "",
+    image: relatedProduct.images[0],
   }));
 
   const session = await auth();
@@ -123,7 +110,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {/* Product Images */}
           <div className="col-span-2">
-            <ProductImages images={product.images ?? []} />
+            <ProductImages images={product.images} />
           </div>
 
           {/* Product Details */}
@@ -136,14 +123,10 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                 {product.name}
               </h1>
 
-              {/* Delivery Notice */}
               <DeliveryNotice
                 title={product.name}
                 deliveryTimeRange="1–3 hours"
               />
-
-              {/* Sold Count Badge */}
-              <SoldCountBadge sold={product.sold || 50} />
 
               <ProductFeatures title={product.name} />
 
@@ -169,9 +152,9 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                 Product Description
               </h2>
               <div className="mt-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed space-y-2">
-                {product.description
-                  ?.split("\n")
-                  .map((line: string, idx: number) => <p key={idx}>{line}</p>)}
+                {product.description.split("\n").map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
               </div>
             </div>
           </div>
@@ -218,6 +201,17 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                   </p>
                 </section>
 
+                {/* Location */}
+                <section aria-labelledby="location-info-title" className="mt-4">
+                  <h3 className="mt-2 font-semibold text-base text-gray-900 dark:text-gray-100">
+                    Estimated Delivery:
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    📧 You&apos;ll receive your digital product via email within{" "}
+                    <strong>1 to 3 hours</strong> of purchase.
+                  </p>
+                </section>
+
                 {/* Return Policy */}
                 <section aria-labelledby="return-policy-title" className="mt-4">
                   <h3
@@ -233,7 +227,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     See our full return policy{" "}
                     <a
-                      href="https://www.Bigbl.com/return-policy"
+                      href="https://www.bigbl.com/return-policy"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 dark:text-blue-400 underline"
@@ -261,7 +255,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     Get the digital product you ordered or your money back.{" "}
                     <a
-                      href="https://www.Bigbl.com/refund-policy"
+                      href="https://www.bigbl.com/refund-policy"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 dark:text-blue-400 underline"
@@ -282,7 +276,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                         slug: product.slug,
                         price: product.price,
                         qty: 1,
-                        image: product.images?.[0] ?? "",
+                        image: product.images![0],
                       }}
                     />
                   </div>
