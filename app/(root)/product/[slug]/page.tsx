@@ -129,7 +129,6 @@ const ProductDetailsPage = async (props: {
               />
 
               {/* Sold Count Badge */}
-              <SoldCountBadge sold={product.sold || 50} />
 
               <ProductFeatures title={product.name} />
 
