@@ -84,15 +84,6 @@ const DeliveryNotice = ({
   );
 };
 
-// --- Sold Count Badge ---
-const SoldCountBadge = ({ sold }: { sold: number }) => {
-  return (
-    <span className="inline-flex items-center animate-pulse rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900 dark:text-blue-300">
-      🎉 We’ve sold {sold.toLocaleString()} units!
-    </span>
-  );
-};
-
 const ProductDetailsPage = async (props: {
   params: Promise<{ slug: string }>;
 }) => {
@@ -132,7 +123,10 @@ const ProductDetailsPage = async (props: {
               </h1>
 
               {/* Delivery Notice */}
-              <DeliveryNotice title={product.name} deliveryTimeRange="1–3 hours" />
+              <DeliveryNotice
+                title={product.name}
+                deliveryTimeRange="1–3 hours"
+              />
 
               {/* Sold Count Badge */}
               <SoldCountBadge sold={product.sold || 50} />
@@ -205,7 +199,8 @@ const ProductDetailsPage = async (props: {
                     📧 Delivered via email within <strong>1 to 3 hours</strong>
                   </p>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
-                    In most cases, you&apos;ll receive your digital product instantly after purchase.
+                    In most cases, you&apos;ll receive your digital product
+                    instantly after purchase.
                   </p>
                 </section>
 
@@ -215,7 +210,8 @@ const ProductDetailsPage = async (props: {
                     Estimated Delivery:
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    📧 You&apos;ll receive your digital product via email within <strong>1 to 3 hours</strong> of purchase.
+                    📧 You&apos;ll receive your digital product via email within{" "}
+                    <strong>1 to 3 hours</strong> of purchase.
                   </p>
                 </section>
 
@@ -228,7 +224,8 @@ const ProductDetailsPage = async (props: {
                     Returns
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    🔁 30-day return policy. Digital product refunds are reviewed case-by-case.
+                    🔁 30-day return policy. Digital product refunds are
+                    reviewed case-by-case.
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     See our full return policy{" "}
@@ -239,7 +236,8 @@ const ProductDetailsPage = async (props: {
                       className="text-blue-600 dark:text-blue-400 underline"
                     >
                       here
-                    </a>.
+                    </a>
+                    .
                   </p>
                 </section>
 
