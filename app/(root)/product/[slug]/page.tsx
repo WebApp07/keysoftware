@@ -93,7 +93,14 @@ const SoldCountBadge = ({ sold }: { sold: number }) => {
   );
 };
 
-const ProductDetailsPage = async ({ params }: { params: { slug: string } }) => {
+// --- Props Type for Next.js Page ---
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+const ProductDetailsPage = async ({ params }: PageProps) => {
   const { slug } = params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
