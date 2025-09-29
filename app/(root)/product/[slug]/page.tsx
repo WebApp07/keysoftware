@@ -218,17 +218,6 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
                   </p>
                 </section>
 
-                {/* Location */}
-                <section aria-labelledby="location-info-title" className="mt-4">
-                  <h3 className="mt-2 font-semibold text-base text-gray-900 dark:text-gray-100">
-                    Estimated Delivery:
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    📧 You&apos;ll receive your digital product via email within{" "}
-                    <strong>1 to 3 hours</strong> of purchase.
-                  </p>
-                </section>
-
                 {/* Return Policy */}
                 <section aria-labelledby="return-policy-title" className="mt-4">
                   <h3
