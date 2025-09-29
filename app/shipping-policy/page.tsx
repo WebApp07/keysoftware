@@ -6,9 +6,9 @@ export default function ShippingPolicyPage() {
       <section>
         <h1 className="text-3xl font-bold mb-4">Shipping & Delivery Policy</h1>
         <p className="text-gray-700 dark:text-gray-300">
-          At KeySoftware, we specialize in digital software delivery. All
-          purchases are sent electronically via email. There is no physical
-          shipping involved.
+          At Bigbl, we specialize in digital software delivery. All purchases
+          are sent electronically via email. There is no physical shipping
+          involved.
         </p>
       </section>
 
@@ -49,10 +49,10 @@ export default function ShippingPolicyPage() {
           <li>
             📧 Email:{" "}
             <a
-              href="mailto:KeySoftware01@hotmail.com"
+              href="mailto:Bigbl01@hotmail.com"
               className="text-blue-600 underline"
             >
-              KeySoftware01@hotmail.com
+              Bigbl01@hotmail.com
             </a>
           </li>
           <li>📞 Phone: +39 7 58 32 13 08</li>

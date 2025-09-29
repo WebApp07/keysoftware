@@ -238,3 +238,23 @@ export async function getAllProductsForFeed() {
     orderBy: { createdAt: "desc" },
   });
 }
+
+// lib/actions/product.actions.ts
+export async function getProductsByCategory(category: string, limit: number = 4) {
+  try {
+    // Replace this with your actual database query
+    const products = await prisma.product.findMany({
+      where: { 
+        category: category,
+        stock: { gt: 0 } // Only show in-stock products
+      },
+      take: limit,
+      orderBy: { createdAt: 'desc' }
+    });
+    
+    return products;
+  } catch (error) {
+    console.error('Error fetching category products:', error);
+    return [];
+  }
+}

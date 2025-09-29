@@ -6,34 +6,10 @@ export default function TermsOfService() {
       <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-2">Business Information</h2>
-        <ul className="text-gray-700 space-y-1">
-          <li>
-            <strong>Business Name:</strong> KeySoftware
-          </li>
-          <li>
-            <strong>Address:</strong> Piazza Guglielmo Oberdan, 12, Milan 20025
-          </li>
-          <li>
-            <strong>Email:</strong>{" "}
-            <a
-              href="mailto:KeySoftware01@hotmail.com"
-              className="text-blue-600 underline"
-            >
-              KeySoftware01@hotmail.com
-            </a>
-          </li>
-          <li>
-            <strong>Phone:</strong> +39 7 58 32 13 08
-          </li>
-        </ul>
-      </section>
-
-      <section>
         <h2 className="text-2xl font-semibold mb-2">User Agreement</h2>
         <p className="text-gray-700">
-          By purchasing products from KeySoftware, you agree to comply with and
-          be bound by the terms and conditions set forth in this agreement.
+          By purchasing products from Bigbl, you agree to comply with and be
+          bound by the terms and conditions set forth in this agreement.
         </p>
       </section>
 
@@ -75,10 +51,10 @@ export default function TermsOfService() {
         <p className="text-gray-700">
           For any questions, concerns, or support requests, please contact us at{" "}
           <a
-            href="mailto:KeySoftware01@hotmail.com"
+            href="mailto:Bigbl01@hotmail.com"
             className="text-blue-600 underline"
           >
-            KeySoftware01@hotmail.com
+            Bigbl01@hotmail.com
           </a>{" "}
           or call +39 7 58 32 13 08 during business hours (Mon–Fri, 9:00 AM –
           6:00 PM CET).

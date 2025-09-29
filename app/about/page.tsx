@@ -4,9 +4,9 @@ export default function AboutPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-12 space-y-8">
       <section>
-        <h1 className="text-3xl font-bold mb-4">About KeySoftware</h1>
+        <h1 className="text-3xl font-bold mb-4">About Bigbl</h1>
         <p className="text-gray-700">
-          KeySoftware is a Italy-based digital software store offering genuine
+          Bigbl is a Italy-based digital software store offering genuine
           software licenses at competitive prices. We specialize in activation
           keys for Windows, Microsoft Office, antivirus programs, and more —
           delivered digitally via email.
@@ -19,38 +19,23 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-2">Business Information</h2>
-        <ul className="text-gray-700 space-y-1">
-          <li>
-            <strong>Business Name:</strong> KeySoftware
-          </li>
-          <li>
-            <strong>Address:</strong> Piazza Guglielmo Oberdan, 12, Milan 20025
-          </li>
-        </ul>
-      </section>
-
-      <section>
         <h2 className="text-2xl font-semibold mb-2">
           Customer Service Contact
         </h2>
         <ul className="text-gray-700 space-y-1">
           <li>
             <strong>Website:</strong>{" "}
-            <a
-              href="https://www.KeySoftware.com"
-              className="text-blue-600 underline"
-            >
-              www.KeySoftware.com
+            <a href="https://www.Bigbl.com" className="text-blue-600 underline">
+              www.Bigbl.com
             </a>
           </li>
           <li>
             <strong>Email:</strong>{" "}
             <a
-              href="mailto:KeySoftware01@hotmail.com"
+              href="mailto:Bigbl01@hotmail.com"
               className="text-blue-600 underline"
             >
-              KeySoftware01@hotmail.com
+              Bigbl01@hotmail.com
             </a>
           </li>
           <li>
@@ -91,7 +76,7 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold mb-2">Follow Us</h2>
         <div className="flex space-x-4 text-blue-600">
           <a
-            href="https://www.facebook.com/people/KeySoftware/61574765687905/"
+            href="https://www.facebook.com/people/Bigbl/61574765687905/"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -99,7 +84,7 @@ export default function AboutPage() {
           </a>
 
           <a
-            href="https://www.instagram.com/KeySoftwarekey/?next=%2F"
+            href="https://www.instagram.com/Bigblkey/?next=%2F"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -107,7 +92,7 @@ export default function AboutPage() {
           </a>
 
           <a
-            href="https://www.trustpilot.com/review/KeySoftware.com"
+            href="https://www.trustpilot.com/review/Bigbl.com"
             target="_blank"
             rel="noopener noreferrer"
           >

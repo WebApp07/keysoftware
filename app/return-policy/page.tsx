@@ -6,7 +6,7 @@ export default function ReturnPolicyPage() {
       <section>
         <h1 className="text-3xl font-bold mb-4">Return & Refund Policy</h1>
         <p className="text-gray-700 dark:text-gray-300">
-          At KeySoftware, we strive to provide you with genuine digital software
+          At Bigbl, we strive to provide you with genuine digital software
           licenses delivered instantly and reliably. Since our products are
           digital and activated upon delivery, our return policy reflects the
           nature of the products we offer.
@@ -54,10 +54,10 @@ export default function ReturnPolicyPage() {
           <li>
             📧 Email:{" "}
             <a
-              href="mailto:KeySoftware01@hotmail.com"
+              href="mailto:Bigbl01@hotmail.com"
               className="text-blue-600 underline"
             >
-              KeySoftware01@hotmail.com
+              Bigbl01@hotmail.com
             </a>
           </li>
           <li>📞 Phone: +39 7 58 32 13 08</li>

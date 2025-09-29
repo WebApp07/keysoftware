@@ -31,8 +31,7 @@ const Footer = () => {
         ))}
       </div>
       <div className="p-5 flex-center text-xs text-gray-500">
-        Developed By KeySoftware © {currentYear} {APP_NAME}. All Rights
-        Reserved.
+        Developed By Bigbl © {currentYear} {APP_NAME}. All Rights Reserved.
       </div>
     </footer>
   );

@@ -6,9 +6,9 @@ export default function PaymentMethodsPage() {
       <section>
         <h1 className="text-3xl font-bold mb-4">Payment Methods</h1>
         <p className="text-gray-700 dark:text-gray-300">
-          KeySoftware accepts a variety of secure payment methods to ensure a
-          smooth and protected checkout experience. All transactions are
-          encrypted and processed through trusted gateways.
+          Bigbl accepts a variety of secure payment methods to ensure a smooth
+          and protected checkout experience. All transactions are encrypted and
+          processed through trusted gateways.
         </p>
       </section>
 
@@ -46,10 +46,10 @@ export default function PaymentMethodsPage() {
           <li>
             📧{" "}
             <a
-              href="mailto:KeySoftware01@hotmail.com"
+              href="mailto:Bigbl01@hotmail.com"
               className="text-blue-600 underline"
             >
-              KeySoftware01@hotmail.com
+              Bigbl01@hotmail.com
             </a>
           </li>
           <li>📞 +39 7 58 32 13 08</li>

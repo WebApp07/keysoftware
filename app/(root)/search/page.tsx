@@ -1,37 +1,31 @@
 import ProductCard from "@/components/shared/product/product-card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   getAllProducts,
   getAllCategories,
 } from "@/lib/actions/product.actions";
+import { SearchIcon, FilterIcon, XIcon, StarIcon, ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
 
 const prices = [
-  {
-    name: "$1 to $50",
-    value: "1-50",
-  },
-  {
-    name: "$51 to $100",
-    value: "51-100",
-  },
-  {
-    name: "$101 to $200",
-    value: "101-200",
-  },
-  {
-    name: "$201 to $500",
-    value: "201-500",
-  },
-  {
-    name: "$501 to $1000",
-    value: "501-1000",
-  },
+  { name: "Any Price", value: "all" },
+  { name: "$1 to $50", value: "1-50" },
+  { name: "$51 to $100", value: "51-100" },
+  { name: "$101 to $200", value: "101-200" },
+  { name: "$201 to $500", value: "201-500" },
+  { name: "$501 to $1000", value: "501-1000" },
 ];
 
-const ratings = [4, 3, 2, 1];
+const ratings = [5,4, 3, 2, 1];
 
-const sortOrders = ["newest", "lowest", "highest", "rating"];
+const sortOrders = [
+  { name: "Newest", value: "newest" },
+  { name: "Price: Low to High", value: "lowest" },
+  { name: "Price: High to Low", value: "highest" },
+  { name: "Highest Rated", value: "rating" },
+];
 
 export async function generateMetadata(props: {
   searchParams: Promise<{
@@ -49,18 +43,13 @@ export async function generateMetadata(props: {
   } = await props.searchParams;
 
   const isQuerySet = q && q !== "all" && q.trim() !== "";
-  const isCategorySet =
-    category && category !== "all" && category.trim() !== "";
+  const isCategorySet = category && category !== "all" && category.trim() !== "";
   const isPriceSet = price && price !== "all" && price.trim() !== "";
   const isRatingSet = rating && rating !== "all" && rating.trim() !== "";
 
   if (isQuerySet || isCategorySet || isPriceSet || isRatingSet) {
     return {
-      title: `
-      Search ${isQuerySet ? q : ""} 
-      ${isCategorySet ? `: Category ${category}` : ""}
-      ${isPriceSet ? `: Price ${price}` : ""}
-      ${isRatingSet ? `: Rating ${rating}` : ""}`,
+      title: `Search ${isQuerySet ? q : ""} ${isCategorySet ? `: Category ${category}` : ""} ${isPriceSet ? `: Price ${price}` : ""} ${isRatingSet ? `: Rating ${rating}` : ""}`,
     };
   } else {
     return {
@@ -110,7 +99,7 @@ const SearchPage = async (props: {
     if (r) params.rating = r;
     if (pg) params.page = pg;
 
-    return `/search?${new URLSearchParams(params).toString()}`;
+    return `/search?${new URLSearchParams(params as any).toString()}`;
   };
 
   const products = await getAllProducts({
@@ -124,119 +113,243 @@ const SearchPage = async (props: {
 
   const categories = await getAllCategories();
 
+  const activeFilters = [
+    q !== "all" && q !== "" && `Search: "${q}"`,
+    category !== "all" && category !== "" && `Category: ${category}`,
+    price !== "all" && `Price: ${prices.find(p => p.value === price)?.name}`,
+    rating !== "all" && `Rating: ${rating} stars & up`,
+  ].filter(Boolean);
+
   return (
-    <div className="grid md:grid-cols-5 md:gap-5">
-      <div className="filter-links">
-        {/* Category Links */}
-        <div className="text-xl mb-2 mt-3">Department</div>
-        <div>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                className={`${
-                  (category === "all" || category === "") && "font-bold"
-                }`}
-                href={getFilterUrl({ c: "all" })}
-              >
-                Any
-              </Link>
-            </li>
-            {categories.map((x) => (
-              <li key={x.category}>
-                <Link
-                  className={`${category === x.category && "font-bold"}`}
-                  href={getFilterUrl({ c: x.category })}
-                >
-                  {x.category}
-                </Link>
-              </li>
-            ))}
-          </ul>
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <div className="container py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold tracking-tight mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            {q !== "all" && q !== "" ? `Search: "${q}"` : "Browse Products"}
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            Discover amazing digital products
+          </p>
         </div>
-        {/* Price Links */}
-        <div className="text-xl mb-2 mt-8">Price</div>
-        <div>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                className={`${price === "all" && "font-bold"}`}
-                href={getFilterUrl({ p: "all" })}
-              >
-                Any
-              </Link>
-            </li>
-            {prices.map((p) => (
-              <li key={p.value}>
-                <Link
-                  className={`${price === p.value && "font-bold"}`}
-                  href={getFilterUrl({ p: p.value })}
-                >
-                  {p.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto mb-12">
+          <form className="flex gap-4">
+            <div className="relative flex-1">
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+              <Input
+                placeholder="Search for products, categories, brands..."
+                defaultValue={q !== "all" ? q : ""}
+                name="q"
+                className="pl-10 pr-4 py-6 text-lg"
+              />
+            </div>
+            <Button type="submit" className="px-8 py-6 text-lg">
+              <SearchIcon className="w-5 h-5 mr-2" />
+              Search
+            </Button>
+          </form>
         </div>
-        {/* Rating Links */}
-        <div className="text-xl mb-2 mt-8">Customer Ratings</div>
-        <div>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                className={`${rating === "all" && "font-bold"}`}
-                href={getFilterUrl({ r: "all" })}
-              >
-                Any
-              </Link>
-            </li>
-            {ratings.map((r) => (
-              <li key={r}>
-                <Link
-                  className={`${rating === r.toString() && "font-bold"}`}
-                  href={getFilterUrl({ r: `${r}` })}
-                >
-                  {`${r} stars & up`}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="md:col-span-4 space-y-4">
-        <div className="flex-between flex-col md:flex-row my-4">
-          <div className="flex items-center">
-            {q !== "all" && q !== "" && "Query: " + q}
-            {category !== "all" && category !== "" && "Category: " + category}
-            {price !== "all" && " Price: " + price}
-            {rating !== "all" && " Rating: " + rating + " stars & up"}
-            &nbsp;
-            {(q !== "all" && q !== "") ||
-            (category !== "all" && category !== "") ||
-            rating !== "all" ||
-            price !== "all" ? (
-              <Button variant={"link"} asChild>
-                <Link href="/search">Clear</Link>
-              </Button>
-            ) : null}
+
+        <div className="grid lg:grid-cols-4 gap-8">
+          {/* Filters Sidebar */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-24">
+              <CardContent className="p-6 space-y-8">
+                {/* Categories Filter */}
+                <div>
+                  <h3 className="font-semibold text-lg mb-4 flex items-center">
+                    <FilterIcon className="w-5 h-5 mr-2" />
+                    Categories
+                  </h3>
+                  <div className="space-y-2">
+                    <Link
+                      href={getFilterUrl({ c: "all" })}
+                      className={`block px-3 py-2 rounded-lg transition-colors ${
+                        category === "all"
+                          ? "bg-primary text-primary-foreground font-medium"
+                          : "hover:bg-muted"
+                      }`}
+                    >
+                      All Categories
+                    </Link>
+                    {categories.map((x) => (
+                      <Link
+                        key={x.category}
+                        href={getFilterUrl({ c: x.category })}
+                        className={`block px-3 py-2 rounded-lg transition-colors ${
+                          category === x.category
+                            ? "bg-primary text-primary-foreground font-medium"
+                            : "hover:bg-muted"
+                        }`}
+                      >
+                        {x.category}
+                        <span className="text-muted-foreground text-sm ml-2">
+                          ({x._count})
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Price Filter */}
+                <div>
+                  <h3 className="font-semibold text-lg mb-4">Price Range</h3>
+                  <div className="space-y-2">
+                    <Link
+                      href={getFilterUrl({ p: "all" })}
+                      className={`block px-3 py-2 rounded-lg transition-colors ${
+                        price === "all"
+                          ? "bg-primary text-primary-foreground font-medium"
+                          : "hover:bg-muted"
+                      }`}
+                    >
+                      Any Price
+                    </Link>
+                    {prices.filter(p => p.value !== "all").map((p) => (
+                      <Link
+                        key={p.value}
+                        href={getFilterUrl({ p: p.value })}
+                        className={`block px-3 py-2 rounded-lg transition-colors ${
+                          price === p.value
+                            ? "bg-primary text-primary-foreground font-medium"
+                            : "hover:bg-muted"
+                        }`}
+                      >
+                        {p.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Rating Filter */}
+                <div>
+                  <h3 className="font-semibold text-lg mb-4">Customer Rating</h3>
+                  <div className="space-y-2">
+                    <Link
+                      href={getFilterUrl({ r: "all" })}
+                      className={`block px-3 py-2 rounded-lg transition-colors ${
+                        rating === "all"
+                          ? "bg-primary text-primary-foreground font-medium"
+                          : "hover:bg-muted"
+                      }`}
+                    >
+                      Any Rating
+                    </Link>
+                    {ratings.map((r) => (
+                      <Link
+                        key={r}
+                        href={getFilterUrl({ r: `${r}` })}
+                        className={`block px-3 py-2 rounded-lg transition-colors ${
+                          rating === r.toString()
+                            ? "bg-primary text-primary-foreground font-medium"
+                            : "hover:bg-muted"
+                        }`}
+                      >
+                        <div className="flex items-center">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <StarIcon
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < r ? "text-yellow-400 fill-current" : "text-gray-300"
+                              }`}
+                            />
+                          ))}
+                          <span className="ml-2">& up</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-          <div>
-            Sort by{" "}
-            {sortOrders.map((s) => (
-              <Link
-                key={s}
-                className={`mx-2 ${sort == s && "font-bold"}`}
-                href={getFilterUrl({ s })}
-              >
-                {s}
-              </Link>
-            ))}
+
+          {/* Products Grid */}
+          <div className="lg:col-span-3">
+            {/* Results Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+              <div className="flex items-center gap-4">
+                <span className="text-muted-foreground">
+                  {products.data.length} products found
+                </span>
+                
+                {/* Active Filters */}
+                {activeFilters.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {activeFilters.map((filter, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm"
+                      >
+                        {filter}
+                        <Link
+                          href={`/search?${new URLSearchParams({
+                            q: q !== "all" ? q : "",
+                            category: "all",
+                            price: "all",
+                            rating: "all",
+                            sort,
+                            page: "1"
+                          } as any)}`}
+                          className="hover:text-destructive"
+                        >
+                          <XIcon className="w-3 h-3" />
+                        </Link>
+                      </span>
+                    ))}
+                    <Link
+                      href="/search"
+                      className="text-sm text-muted-foreground hover:text-destructive"
+                    >
+                      Clear all
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Sort Options */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Sort by:</span>
+                <div className="flex gap-1">
+                  {sortOrders.map((s) => (
+                    <Link
+                      key={s.value}
+                      href={getFilterUrl({ s: s.value })}
+                      className={`px-3 py-1 rounded-md text-sm transition-colors ${
+                        sort === s.value
+                          ? "bg-primary text-primary-foreground font-medium"
+                          : "hover:bg-muted"
+                      }`}
+                    >
+                      {s.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Products Grid */}
+            {products.data.length === 0 ? (
+              <div className="text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-semibold mb-2">No products found</h3>
+                <p className="text-muted-foreground mb-6">
+                  Try adjusting your search filters or browse all categories
+                </p>
+                <Link href="/search">
+                  <Button variant="outline">Clear Filters</Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {products.data.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {products.data.length === 0 && <div>No products found</div>}
-          {products.data.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ export default function ContactPage() {
         <h2 className="text-2xl font-semibold">Customer Service</h2>
         <ul className="space-y-2 text-sm sm:text-base text-gray-800 dark:text-gray-300">
           <li>
-            <strong>Business Name:</strong> KeySoftware
+            <strong>Business Name:</strong> Bigbl
           </li>
           <li>
             <strong>Address:</strong> Piazza Guglielmo Oberdan, 12, Milan 20025
@@ -26,10 +26,10 @@ export default function ContactPage() {
           <li>
             <strong>Email:</strong>{" "}
             <a
-              href="mailto:KeySoftware01@hotmail.com"
+              href="mailto:Bigbl01@hotmail.com"
               className="text-blue-600 underline"
             >
-              KeySoftware01@hotmail.com
+              Bigbl01@hotmail.com
             </a>
           </li>
           <li>
@@ -47,7 +47,7 @@ export default function ContactPage() {
       {/* Optional - Add Map */}
       {/* <section className="rounded-xl overflow-hidden shadow">
         <iframe
-          title="KeySoftware Location"
+          title="Bigbl Location"
           src="https://www.google.com/maps?q=Orp+Jauche+Italy&output=embed"
           width="100%"
           height="300"
