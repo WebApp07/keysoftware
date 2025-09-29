@@ -84,10 +84,17 @@ const DeliveryNotice = ({
   );
 };
 
-const ProductDetailsPage = async (props: {
-  params: Promise<{ slug: string }>;
-}) => {
-  const { slug } = await props.params;
+// --- Sold Count Badge ---
+const SoldCountBadge = ({ sold }: { sold: number }) => {
+  return (
+    <span className="inline-flex items-center animate-pulse rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+      🎉 We’ve sold {sold.toLocaleString()} units!
+    </span>
+  );
+};
+
+const ProductDetailsPage = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
@@ -96,7 +103,7 @@ const ProductDetailsPage = async (props: {
   ).map((relatedProduct) => ({
     ...relatedProduct,
     price: relatedProduct.price.toString(),
-    image: relatedProduct.images[0],
+    image: relatedProduct.images?.[0] ?? "",
   }));
 
   const session = await auth();
@@ -109,7 +116,7 @@ const ProductDetailsPage = async (props: {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {/* Product Images */}
           <div className="col-span-2">
-            <ProductImages images={product.images} />
+            <ProductImages images={product.images ?? []} />
           </div>
 
           {/* Product Details */}
@@ -129,6 +136,7 @@ const ProductDetailsPage = async (props: {
               />
 
               {/* Sold Count Badge */}
+              <SoldCountBadge sold={product.sold || 50} />
 
               <ProductFeatures title={product.name} />
 
@@ -154,9 +162,9 @@ const ProductDetailsPage = async (props: {
                 Product Description
               </h2>
               <div className="mt-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed space-y-2">
-                {product.description.split("\n").map((line, idx) => (
-                  <p key={idx}>{line}</p>
-                ))}
+                {product.description
+                  ?.split("\n")
+                  .map((line: string, idx: number) => <p key={idx}>{line}</p>)}
               </div>
             </div>
           </div>
@@ -278,7 +286,7 @@ const ProductDetailsPage = async (props: {
                         slug: product.slug,
                         price: product.price,
                         qty: 1,
-                        image: product.images![0],
+                        image: product.images?.[0] ?? "",
                       }}
                     />
                   </div>
