@@ -9,10 +9,10 @@ import {
 } from "@/lib/actions/product.actions";
 import FAQPage from "@/components/FAQ";
 import SafeBrowsingTrust from "@/components/SafeBrowsingTrust";
-import ReviewsSection from "../../components/ReviewsSection";
 import { Suspense } from "react";
 import CollectionsSection from "@/components/shared/collections-section";
 import CollectionsSkeleton from "@/components/shared/collections-section-skeleton";
+import BuyerProtection from "@/components/BuyerProtection";
 const Home = async () => {
   const latestProducts = await getLatestProducts();
   const featuredProducts = await getFeaturedProdcuts();
@@ -28,10 +28,8 @@ const Home = async () => {
       </Suspense>
       <SafeBrowsingTrust />
 
-      <DealCountdown />
+      <BuyerProtection />
 
-      <IconBoxes />
-      <ReviewsSection />
       <FAQPage />
 
       <ViewAllProductsButton />

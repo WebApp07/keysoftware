@@ -8,11 +8,11 @@ export default function PrivacyPolicy() {
 
       <section className="space-y-4 text-gray-700 leading-relaxed">
         <p>
-          At Bigbl, we are committed to protecting your privacy and ensuring
-          that your personal data is handled in accordance with applicable data
-          protection laws. This privacy policy applies specifically to our
-          digital products and services, detailing how we collect, use, and
-          safeguard your personal data.
+          At keyversely, we are committed to protecting your privacy and
+          ensuring that your personal data is handled in accordance with
+          applicable data protection laws. This privacy policy applies
+          specifically to our digital products and services, detailing how we
+          collect, use, and safeguard your personal data.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-2">
@@ -56,10 +56,10 @@ export default function PrivacyPolicy() {
           personal data. You may also object to processing or request data
           portability. To exercise your rights, contact us at{" "}
           <a
-            href="mailto:Bigbl01@hotmail.com"
+            href="mailto:keyversely01@hotmail.com"
             className="text-blue-600 underline"
           >
-            Bigbl01@hotmail.com
+            keyversely01@hotmail.com
           </a>
           .
         </p>
@@ -89,10 +89,10 @@ export default function PrivacyPolicy() {
         <p>
           For any questions or concerns, please contact us at{" "}
           <a
-            href="mailto:Bigbl01@hotmail.com"
+            href="mailto:keyversely01@hotmail.com"
             className="text-blue-600 underline"
           >
-            Bigbl01@hotmail.com
+            keyversely01@hotmail.com
           </a>
           .
         </p>
