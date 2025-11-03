@@ -166,11 +166,8 @@ export async function approvePayPalOrder(
   data: { orderID: string }
 ) {
   try {
-    // Get order from database
     const order = await prisma.order.findFirst({
-      where: {
-        id: orderId,
-      },
+      where: { id: orderId },
     });
 
     if (!order) throw new Error("Order not found");
@@ -185,7 +182,6 @@ export async function approvePayPalOrder(
       throw new Error("Error in PayPal payment");
     }
 
-    // Update order to paid
     await updateOrderToPaid({
       orderId,
       paymentResult: {

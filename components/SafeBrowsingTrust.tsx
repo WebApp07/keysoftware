@@ -23,7 +23,7 @@ export default function SafeBrowsingTrust() {
         </p>
 
         <Link
-          href="https://transparencyreport.google.com/safe-browsing/search?url=https:%2F%2Fwww.Bigbl.com"
+          href="https://transparencyreport.google.com/safe-browsing/search?url=https:%2F%2Fwww.keyversely.com"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium transition"

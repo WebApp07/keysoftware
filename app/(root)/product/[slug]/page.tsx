@@ -227,7 +227,7 @@ const ProductDetailsPage = async (props: {
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     See our full return policy{" "}
                     <a
-                      href="https://www.bigbl.com/return-policy"
+                      href="https://www.keyversely.com/return-policy"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 dark:text-blue-400 underline"
@@ -255,7 +255,7 @@ const ProductDetailsPage = async (props: {
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     Get the digital product you ordered or your money back.{" "}
                     <a
-                      href="https://www.bigbl.com/refund-policy"
+                      href="https://www.keyversely.com/refund-policy"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 dark:text-blue-400 underline"

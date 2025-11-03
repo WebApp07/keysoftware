@@ -15,7 +15,7 @@ const LINKS = [
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const APP_NAME = "blbig"; // ← put your actual app name here
+  const APP_NAME = "keyversely"; // ← put your actual app name here
 
   return (
     <footer className="border-t">
@@ -31,7 +31,8 @@ const Footer = () => {
         ))}
       </div>
       <div className="p-5 flex-center text-xs text-gray-500">
-        Developed By Bigbl © {currentYear} {APP_NAME}. All Rights Reserved.
+        Developed By keyversely © {currentYear} {APP_NAME}. All Rights
+        Reserved.
       </div>
     </footer>
   );
