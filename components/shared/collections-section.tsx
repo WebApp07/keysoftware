@@ -18,7 +18,9 @@ const CollectionsSection = async () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center px-4 py-2 bg-primary/10 rounded-full mb-6">
             <ZapIcon className="w-5 h-5 text-primary mr-2" />
-            <span className="text-sm font-medium text-primary">Popular Collections</span>
+            <span className="text-sm font-medium text-primary">
+              Popular Collections
+            </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
             Shop by Category
@@ -32,7 +34,7 @@ const CollectionsSection = async () => {
         <div className="space-y-20">
           {topCategories.map(async (category) => {
             const products = await getProductsByCategory(category.category, 8);
-            
+
             return (
               <div key={category.category} className="space-y-8">
                 {/* Collection Header */}
@@ -54,8 +56,10 @@ const CollectionsSection = async () => {
                       </p>
                     </div>
                   </div>
-                  
-                  <Link href={`/search?category=${encodeURIComponent(category.category)}`}>
+
+                  <Link
+                    href={`/search?category=${encodeURIComponent(category.category)}`}
+                  >
                     <Button variant="outline" className="gap-2 group" size="lg">
                       View All
                       <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -73,8 +77,6 @@ const CollectionsSection = async () => {
             );
           })}
         </div>
-
-       
       </div>
     </section>
   );

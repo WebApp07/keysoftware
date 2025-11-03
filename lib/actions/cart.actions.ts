@@ -14,7 +14,7 @@ const calcPrice = (items: CartItem[]) => {
   const itemsPrice = round2(
       items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
     ),
-    shippingPrice = round2(itemsPrice > 60 ? 0 : 0),
+    shippingPrice = round2(itemsPrice > 60 ? 0 : 2.6),
     taxPrice = round2(0 * itemsPrice),
     totalPrice = round2(itemsPrice + taxPrice + shippingPrice);
 
